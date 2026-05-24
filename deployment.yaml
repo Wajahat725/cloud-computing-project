@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-k8s-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-k8s-app
+  template:
+    metadata:
+      labels:
+        app: my-k8s-app
+    spec:
+      imagePullSecrets:
+      - name: ecr-secret
+      containers:
+      - name: my-k8s-app
+        image: 383531141739.dkr.ecr.us-east-1.amazonaws.com/my-k8s-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
